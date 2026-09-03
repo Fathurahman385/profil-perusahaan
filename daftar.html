@@ -1,78 +1,174 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Daftar Akun | Website Perusahaan</title>
-	<link rel="stylesheet" href="daftar.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Akun</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #111827, #374151);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 420px;
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #374151;
+    }
+
+    .login {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .login a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    #pesan {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
-	<main class="auth-container">
-		<section class="auth-card" aria-labelledby="register-title">
-			<div class="logo">
-				<div class="logo-icon" aria-hidden="true">&#127970;</div>
-				<h1 id="register-title">Nama Perusahaan</h1>
-				<p>Buat akun baru</p>
-			</div>
 
-			<form id="registerForm">
-				<div class="input-group">
-					<label for="nama">Nama Lengkap</label>
-					<input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" autocomplete="name" required>
-				</div>
+  <div class="container">
+    <h1>Daftar Akun</h1>
+    <p class="subtitle">Buat akun baru untuk melanjutkan</p>
 
-				<div class="input-group">
-					<label for="email">Email</label>
-					<input type="email" id="email" name="email" placeholder="nama@email.com" autocomplete="email" required>
-				</div>
+    <form id="formDaftar">
 
-				<div class="input-group">
-					<label for="password">Kata Sandi</label>
-					<input type="password" id="password" name="password" placeholder="Minimal 8 karakter" minlength="8" autocomplete="new-password" required>
-				</div>
+      <label for="nama">Nama</label>
+      <input
+        type="text"
+        id="nama"
+        placeholder="Masukkan nama"
+        required
+      >
 
-				<div class="input-group">
-					<label for="konfirmasi-password">Konfirmasi Kata Sandi</label>
-					<input type="password" id="konfirmasi-password" name="konfirmasi-password" placeholder="Ulangi kata sandi" minlength="8" autocomplete="new-password" required>
-				</div>
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Masukkan email"
+        required
+      >
 
-				<label class="terms">
-					<input type="checkbox" name="terms" required>
-					<span>Saya menyetujui syarat dan ketentuan.</span>
-				</label>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Masukkan password"
+        required
+      >
 
-				<button type="submit">Daftar Akun <span aria-hidden="true">&#8594;</span></button>
-				<p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-			</form>
+      <button type="submit">Daftar</button>
 
-			<p class="login-link">Sudah memiliki akun? <a href="login.html">Masuk di sini</a></p>
-			<a class="back-link" href="index.html">&#8592; Kembali ke beranda</a>
-		</section>
-	</main>
+    </form>
 
-	<script>
-		const registerForm = document.getElementById('registerForm');
-		const password = document.getElementById('password');
-		const confirmPassword = document.getElementById('konfirmasi-password');
-		const formStatus = document.getElementById('formStatus');
+    <div id="pesan"></div>
 
-		registerForm.addEventListener('submit', (event) => {
-			event.preventDefault();
+    <div class="login">
+      Sudah punya akun?
+      <a href="login.html">Login di sini</a>
+    </div>
+  </div>
 
-			if (password.value !== confirmPassword.value) {
-				confirmPassword.setCustomValidity('Konfirmasi kata sandi tidak sama.');
-				confirmPassword.reportValidity();
-				return;
-			}
+  <script>
+    document.getElementById("formDaftar").addEventListener("submit", function(event) {
+      event.preventDefault();
 
-			confirmPassword.setCustomValidity('');
-			formStatus.textContent = 'Akun berhasil dibuat. Silakan masuk.';
-			registerForm.reset();
-		});
+      const nama = document.getElementById("nama").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
 
-		confirmPassword.addEventListener('input', () => {
-			confirmPassword.setCustomValidity(password.value === confirmPassword.value ? '' : 'Konfirmasi kata sandi tidak sama.');
-		});
-	</script>
+      const pesan = document.getElementById("pesan");
+
+      if (!nama || !email || !password) {
+        pesan.textContent = "Semua kolom harus diisi.";
+        return;
+      }
+
+      if (password.length < 6) {
+        pesan.textContent = "Password minimal 6 karakter.";
+        return;
+      }
+
+      const akun = {
+        nama: nama,
+        email: email,
+        password: password
+      };
+
+      localStorage.setItem("akunPengguna", JSON.stringify(akun));
+
+      pesan.textContent = "Pendaftaran berhasil! Mengarahkan ke Login...";
+
+      setTimeout(function() {
+        window.location.href = "login.html";
+      }, 1000);
+    });
+  </script>
+
 </body>
 </html>
