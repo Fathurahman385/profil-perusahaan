@@ -1,56 +1,163 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login | Website Perusahaan</title>
-	<link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Akun</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #111827, #374151);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 420px;
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #374151;
+    }
+
+    .daftar {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .daftar a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    #pesan {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
-	<main class="login-container">
-		<section class="login-card" aria-labelledby="login-title">
-			<div class="logo">
-				<div class="logo-icon" aria-hidden="true">&#127970;</div>
-				<h1 id="login-title">Nama Perusahaan</h1>
-				<p>Silakan login ke akun Anda</p>
-			</div>
 
-			<form id="loginForm">
-				<div class="input-group">
-					<label for="email">Email</label>
-					<input type="email" id="email" name="email" placeholder="Masukkan email" autocomplete="email" required>
-				</div>
+  <div class="container">
+    <h1>Login</h1>
+    <p class="subtitle">Masuk ke akun Anda</p>
 
-				<div class="input-group">
-					<div class="password-label">
-						<label for="password">Kata Sandi</label>
-						<a href="#forgot-password">Lupa kata sandi?</a>
-					</div>
-					<input type="password" id="password" name="password" placeholder="Masukkan kata sandi" autocomplete="current-password" required>
-				</div>
+    <form id="formLogin">
 
-				<label class="remember-me">
-					<input type="checkbox" name="remember">
-					<span>Ingat saya</span>
-				</label>
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Masukkan email"
+        required
+      >
 
-				<button type="submit">Masuk <span aria-hidden="true">&#8594;</span></button>
-				<p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-			</form>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Masukkan password"
+        required
+      >
 
-			<p class="register-link">Belum memiliki akun? <a href="daftar.html">Daftar sekarang</a></p>
-			<a class="back-link" href="index.html">&#8592; Kembali ke beranda</a>
-		</section>
-	</main>
+      <button type="submit">Login</button>
 
-	<script>
-		const loginForm = document.getElementById('loginForm');
-		const formStatus = document.getElementById('formStatus');
+    </form>
 
-		loginForm.addEventListener('submit', (event) => {
-			event.preventDefault();
-			formStatus.textContent = 'Login berhasil.';
-		});
-	</script>
+    <div id="pesan"></div>
+
+    <div class="daftar">
+      Belum punya akun?
+      <a href="daftar.html">Daftar di sini</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("formLogin").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const pesan = document.getElementById("pesan");
+
+      const dataAkun = localStorage.getItem("akunPengguna");
+
+      if (!dataAkun) {
+        pesan.textContent = "Akun belum terdaftar. Silakan daftar terlebih dahulu.";
+        return;
+      }
+
+      const akun = JSON.parse(dataAkun);
+
+      if (email === akun.email && password === akun.password) {
+
+        localStorage.setItem("sudahLogin", "true");
+
+        pesan.textContent = "Login berhasil!";
+
+        setTimeout(function() {
+          window.location.href = "dashboard.html";
+        }, 800);
+
+      } else {
+        pesan.textContent = "Email atau password salah.";
+      }
+    });
+  </script>
+
 </body>
 </html>
