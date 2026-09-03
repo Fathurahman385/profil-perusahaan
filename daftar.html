@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Daftar Akun | Website Perusahaan</title>
+	<link rel="stylesheet" href="daftar.css">
+</head>
+<body>
+	<main class="auth-container">
+		<section class="auth-card" aria-labelledby="register-title">
+			<div class="logo">
+				<div class="logo-icon" aria-hidden="true">&#127970;</div>
+				<h1 id="register-title">Nama Perusahaan</h1>
+				<p>Buat akun baru</p>
+			</div>
+
+			<form id="registerForm">
+				<div class="input-group">
+					<label for="nama">Nama Lengkap</label>
+					<input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" autocomplete="name" required>
+				</div>
+
+				<div class="input-group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" placeholder="nama@email.com" autocomplete="email" required>
+				</div>
+
+				<div class="input-group">
+					<label for="password">Kata Sandi</label>
+					<input type="password" id="password" name="password" placeholder="Minimal 8 karakter" minlength="8" autocomplete="new-password" required>
+				</div>
+
+				<div class="input-group">
+					<label for="konfirmasi-password">Konfirmasi Kata Sandi</label>
+					<input type="password" id="konfirmasi-password" name="konfirmasi-password" placeholder="Ulangi kata sandi" minlength="8" autocomplete="new-password" required>
+				</div>
+
+				<label class="terms">
+					<input type="checkbox" name="terms" required>
+					<span>Saya menyetujui syarat dan ketentuan.</span>
+				</label>
+
+				<button type="submit">Daftar Akun <span aria-hidden="true">&#8594;</span></button>
+				<p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+			</form>
+
+			<p class="login-link">Sudah memiliki akun? <a href="login.html">Masuk di sini</a></p>
+			<a class="back-link" href="index.html">&#8592; Kembali ke beranda</a>
+		</section>
+	</main>
+
+	<script>
+		const registerForm = document.getElementById('registerForm');
+		const password = document.getElementById('password');
+		const confirmPassword = document.getElementById('konfirmasi-password');
+		const formStatus = document.getElementById('formStatus');
+
+		registerForm.addEventListener('submit', (event) => {
+			event.preventDefault();
+
+			if (password.value !== confirmPassword.value) {
+				confirmPassword.setCustomValidity('Konfirmasi kata sandi tidak sama.');
+				confirmPassword.reportValidity();
+				return;
+			}
+
+			confirmPassword.setCustomValidity('');
+			formStatus.textContent = 'Akun berhasil dibuat. Silakan masuk.';
+			registerForm.reset();
+		});
+
+		confirmPassword.addEventListener('input', () => {
+			confirmPassword.setCustomValidity(password.value === confirmPassword.value ? '' : 'Konfirmasi kata sandi tidak sama.');
+		});
+	</script>
+</body>
+</html>

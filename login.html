@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login | Website Perusahaan</title>
+	<link rel="stylesheet" href="login.css">
+</head>
+<body>
+	<main class="login-container">
+		<section class="login-card" aria-labelledby="login-title">
+			<div class="logo">
+				<div class="logo-icon" aria-hidden="true">&#127970;</div>
+				<h1 id="login-title">Nama Perusahaan</h1>
+				<p>Silakan login ke akun Anda</p>
+			</div>
+
+			<form id="loginForm">
+				<div class="input-group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" placeholder="Masukkan email" autocomplete="email" required>
+				</div>
+
+				<div class="input-group">
+					<div class="password-label">
+						<label for="password">Kata Sandi</label>
+						<a href="#forgot-password">Lupa kata sandi?</a>
+					</div>
+					<input type="password" id="password" name="password" placeholder="Masukkan kata sandi" autocomplete="current-password" required>
+				</div>
+
+				<label class="remember-me">
+					<input type="checkbox" name="remember">
+					<span>Ingat saya</span>
+				</label>
+
+				<button type="submit">Masuk <span aria-hidden="true">&#8594;</span></button>
+				<p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+			</form>
+
+			<p class="register-link">Belum memiliki akun? <a href="daftar.html">Daftar sekarang</a></p>
+			<a class="back-link" href="index.html">&#8592; Kembali ke beranda</a>
+		</section>
+	</main>
+
+	<script>
+		const loginForm = document.getElementById('loginForm');
+		const formStatus = document.getElementById('formStatus');
+
+		loginForm.addEventListener('submit', (event) => {
+			event.preventDefault();
+			formStatus.textContent = 'Login berhasil.';
+		});
+	</script>
+</body>
+</html>

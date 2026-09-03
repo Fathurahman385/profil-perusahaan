@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard | Website Perusahaan</title>
+	<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+	<aside class="sidebar" aria-label="Navigasi utama">
+		<div class="logo">
+			<div class="logo-icon" aria-hidden="true">&#127970;</div>
+			<h2>Nama Perusahaan</h2>
+		</div>
+
+		<nav>
+			<a class="active" href="#ringkasan" aria-current="page">&#9632; Ringkasan</a>
+			<a href="#aktivitas">&#9776; Aktivitas</a>
+			<a href="index.html">&#8962; Beranda</a>
+		</nav>
+
+		<a class="logout" href="login.html">&#8592; Keluar</a>
+	</aside>
+
+	<main class="dashboard-main">
+		<header class="topbar">
+			<div>
+				<p class="eyebrow">Panel kontrol</p>
+				<h1>Selamat datang, Admin</h1>
+			</div>
+			<div class="profile-badge" aria-label="Profil Admin">A</div>
+		</header>
+
+		<section id="ringkasan" class="dashboard-section">
+			<div class="section-heading">
+				<div>
+					<p class="section-label">Ringkasan</p>
+					<h2>Gambaran hari ini</h2>
+				</div>
+				<time datetime="2026-09-03">03 September 2026</time>
+			</div>
+
+			<div class="stats-grid">
+				<article class="stat-card accent-lime">
+					<span class="stat-icon">&#9829;</span>
+					<p>Total Pengunjung</p>
+					<strong>1.284</strong>
+					<small>+12,5% dari bulan lalu</small>
+				</article>
+				<article class="stat-card accent-orange">
+					<span class="stat-icon">&#9993;</span>
+					<p>Pesan Masuk</p>
+					<strong>48</strong>
+					<small>8 pesan belum dibaca</small>
+				</article>
+				<article class="stat-card accent-blue">
+					<span class="stat-icon">&#10003;</span>
+					<p>Tugas Selesai</p>
+					<strong>76%</strong>
+					<small>Target mingguan tercapai</small>
+				</article>
+			</div>
+		</section>
+
+		<section id="aktivitas" class="dashboard-section activity-section">
+			<div class="section-heading">
+				<div>
+					<p class="section-label">Aktivitas terbaru</p>
+					<h2>Perkembangan pekerjaan</h2>
+				</div>
+				<button class="filter-button" type="button" id="filterButton">Minggu ini &#9662;</button>
+			</div>
+
+			<div class="activity-layout">
+				<div class="table-wrap">
+					<table>
+						<thead>
+							<tr>
+								<th>Aktivitas</th>
+								<th>Status</th>
+								<th>Waktu</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Pembaruan profil perusahaan</td><td><span class="status done">Selesai</span></td><td>09:42</td></tr>
+							<tr><td>Review laporan bulanan</td><td><span class="status progress">Berjalan</span></td><td>08:30</td></tr>
+							<tr><td>Pesan baru dari pelanggan</td><td><span class="status new">Baru</span></td><td>Kemarin</td></tr>
+							<tr><td>Sinkronisasi data tim</td><td><span class="status done">Selesai</span></td><td>Senin</td></tr>
+						</tbody>
+					</table>
+				</div>
+
+				<aside class="focus-card">
+					<p class="section-label">Fokus utama</p>
+					<h3>Bangun hubungan yang lebih baik.</h3>
+					<p>Periksa pesan pelanggan dan selesaikan tugas prioritas sebelum akhir hari.</p>
+					<a href="#aktivitas">Lihat semua aktivitas <span aria-hidden="true">&#8594;</span></a>
+				</aside>
+			</div>
+		</section>
+	</main>
+
+	<script>
+		const filterButton = document.getElementById('filterButton');
+		filterButton.addEventListener('click', () => {
+			filterButton.textContent = filterButton.textContent.includes('Minggu') ? 'Bulan ini \u25be' : 'Minggu ini \u25be';
+		});
+	</script>
+</body>
+</html>
